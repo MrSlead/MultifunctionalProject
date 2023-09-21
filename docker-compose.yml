@@ -1,0 +1,21 @@
+version: "3"
+services:
+  activemq:
+    container_name: activemq
+    image: islandora/activemq:2
+    environment:
+      - ACTIVEMQ_USER=admin
+      - ACTIVEMQ_PASSWORD=password
+      - ACTIVEMQ_WEB_ADMIN_NAME=admin
+      - ACTIVEMQ_WEB_ADMIN_PASSWORD=password
+      - ACTIVEMQ_WEB_ADMIN_ROLES=admin
+    ports:
+      - "8161:8161"
+      - "61616:61616"
+
+  my-app:
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - activemq
