@@ -13,9 +13,20 @@ services:
       - "8161:8161"
       - "61616:61616"
 
+  database:
+    container_name: db-mysql
+    restart: always
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: archive
+
   my-app:
     build: ./
     ports:
       - "8080:8080"
     depends_on:
       - activemq
+      - database

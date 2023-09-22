@@ -2,17 +2,26 @@ package com.almod.flow.broker.activemq.entity;
 
 import com.almod.flow.broker.entity.AbstractClientRequest;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString(includeFieldNames = true)
+@Entity
+@Table(name = "archive")
 public class ActiveMQClientRequest extends AbstractClientRequest {
+    @JsonIgnore
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     @NotBlank(message = "The firstname cannot be null or empty")
     private String firstName;
 
