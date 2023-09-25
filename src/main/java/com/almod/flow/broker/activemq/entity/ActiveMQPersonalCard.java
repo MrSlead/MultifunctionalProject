@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @ToString(includeFieldNames = true)
 @Entity
 @Table(name = "archive")
-public class ActiveMQClientRequest extends AbstractClientRequest {
+public class ActiveMQPersonalCard extends AbstractClientRequest {
     @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

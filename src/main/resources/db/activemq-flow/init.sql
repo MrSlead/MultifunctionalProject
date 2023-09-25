@@ -16,3 +16,5 @@ create table archive (
 create table archive_seq (
     next_val bigint
 ) engine=InnoDB;
+
+INSERT INTO archive_seq values (1)

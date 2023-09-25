@@ -1,13 +1,14 @@
 package com.almod.flow.broker.activemq.route;
 
-import com.almod.flow.broker.activemq.repo.ActiveMQClientRequestRepo;
-import com.almod.flow.broker.activemq.util.ActiveMQClientRequestHandlerQueue;
+import com.almod.flow.broker.activemq.repo.ActiveMQPersonalCardRepo;
+import com.almod.flow.broker.activemq.service.ActiveMQPersonalCardService;
+import com.almod.flow.broker.activemq.util.ActiveMQPersonalCardHandlerQueue;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ActiveMQToDBRoute extends RouteBuilder {
-    ActiveMQClientRequestRepo requestClientRepo;
+public class ActiveMQPersonalCardToDBRoute extends RouteBuilder {
+    ActiveMQPersonalCardRepo requestClientRepo;
 
     @Override
     public void configure() throws Exception {
@@ -20,6 +21,6 @@ public class ActiveMQToDBRoute extends RouteBuilder {
                 .routeId("activemq-to-mysql")
                 .log("Try send a message to the db!")
                 //.bean(ActiveMQClientRequestHandlerQueue.class, "save(${header.clientRequestString})");
-                .bean(ActiveMQClientRequestHandlerQueue.class, "save");
+                .bean(ActiveMQPersonalCardHandlerQueue.class, "save");
     }
 }

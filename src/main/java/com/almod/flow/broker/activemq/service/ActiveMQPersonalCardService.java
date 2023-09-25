@@ -1,8 +1,8 @@
 package com.almod.flow.broker.activemq.service;
 
 import com.almod.flow.broker.AbstractService;
-import com.almod.flow.broker.activemq.entity.ActiveMQClientRequest;
-import com.almod.flow.broker.activemq.repo.ActiveMQClientRequestRepo;
+import com.almod.flow.broker.activemq.entity.ActiveMQPersonalCard;
+import com.almod.flow.broker.activemq.repo.ActiveMQPersonalCardRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,38 +10,38 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ActiveMQClientRequestService implements AbstractService<ActiveMQClientRequest, Long> {
-    private ActiveMQClientRequestRepo repo;
+public class ActiveMQPersonalCardService implements AbstractService<ActiveMQPersonalCard, Long> {
+    private ActiveMQPersonalCardRepo repo;
 
     @Autowired
-    public void setRepo(ActiveMQClientRequestRepo repo) {
+    public void setRepo(ActiveMQPersonalCardRepo repo) {
         this.repo = repo;
     }
 
     @Override
-    public List<ActiveMQClientRequest> findAll() {
+    public List<ActiveMQPersonalCard> findAll() {
         return repo.findAll();
     }
 
     @Override
-    public Optional<ActiveMQClientRequest> findById(Long aLong) {
+    public Optional<ActiveMQPersonalCard> findById(Long aLong) {
         if(aLong == null || aLong < 0) return Optional.empty();
 
         return repo.findById(aLong);
     }
 
     @Override
-    public Optional<ActiveMQClientRequest> save(ActiveMQClientRequest request) {
+    public Optional<ActiveMQPersonalCard> save(ActiveMQPersonalCard request) {
         return Optional.of(repo.save(request));
     }
 
     @Override
-    public Optional<ActiveMQClientRequest> update(ActiveMQClientRequest request) {
+    public Optional<ActiveMQPersonalCard> update(ActiveMQPersonalCard request) {
         return Optional.of(repo.save(request));
     }
 
     @Override
-    public void delete(ActiveMQClientRequest request) {
+    public void delete(ActiveMQPersonalCard request) {
         repo.delete(request);
     }
 
