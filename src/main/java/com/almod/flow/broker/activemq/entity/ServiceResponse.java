@@ -1,8 +1,6 @@
 package com.almod.flow.broker.activemq.entity;
 
-import com.almod.flow.broker.entity.AbstractServiceResponse;
-
-public class ServiceResponse extends AbstractServiceResponse {
+public class ServiceResponse  {
     private final String status;
     private final String errorMsg;
 

@@ -13,14 +13,15 @@ public class ActiveMQPersonalCardToDBRoute extends RouteBuilder {
     public void configure() throws Exception {
         onException(Exception.class)
                 .handled(true)
-                .log(LoggingLevel.ERROR, "Error when sending to the db: \n${exception.cause}")
+                .log(LoggingLevel.ERROR, "[${header.UUID}] Error when sending to the db: \n${exception.cause}")
                 .setBody(simple("${exception.stacktrace}"))
                 .to("activemq:error");
 
          from("activemq:incoming.files")
                 .routeId("activemq-to-mysql")
-                .log("Try send a message to the db")
-                .bean(ActiveMQPersonalCardHandlerQueue.class, "save");
+                .log("[${header.UUID}] Try send a message to the db")
+                .bean(ActiveMQPersonalCardHandlerQueue.class, "save")
+                .log("[${header.UUID}] Successfully persisting to the db");
     }
 }
 

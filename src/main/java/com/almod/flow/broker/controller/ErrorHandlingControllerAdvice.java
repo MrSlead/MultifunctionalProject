@@ -1,7 +1,7 @@
 package com.almod.flow.broker.controller;
 
 import com.almod.flow.broker.entity.ValidationErrorResponse;
-import com.almod.flow.broker.entity.Error;
+import com.almod.flow.broker.entity.Violation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -25,10 +25,10 @@ public class ErrorHandlingControllerAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ValidationErrorResponse onMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         LOGGER.error(e.getMessage(), e);
-        final List<Error> errors = e.getBindingResult().getFieldErrors().stream()
-                .map(error -> new Error(error.getField(), error.getDefaultMessage()))
+        final List<Violation> violations = e.getBindingResult().getFieldErrors().stream()
+                .map(error -> new Violation(error.getField(), error.getDefaultMessage()))
                 .collect(Collectors.toList());
 
-        return new ValidationErrorResponse(errors);
+        return new ValidationErrorResponse(violations);
     }
 }

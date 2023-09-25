@@ -4,6 +4,7 @@ drop table if exists archive_seq;
 
 create table archive (
     id bigint not null,
+    uuid varchar(255) not null,
     first_name varchar(255),
     last_name varchar(255),
     patronymic varchar(255),

@@ -1,6 +1,6 @@
 package com.almod.flow.broker.activemq.entity;
 
-import com.almod.flow.broker.entity.AbstractClientRequest;
+import com.almod.flow.broker.entity.AbstractEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -16,11 +16,14 @@ import java.time.LocalDate;
 @ToString(includeFieldNames = true)
 @Entity
 @Table(name = "archive")
-public class ActiveMQPersonalCard extends AbstractClientRequest {
+public class ActiveMQPersonalCard implements AbstractEntity {
     @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @JsonIgnore
+    private String UUID = java.util.UUID.randomUUID().toString();
 
     @NotBlank(message = "The firstname cannot be null or empty")
     private String firstName;

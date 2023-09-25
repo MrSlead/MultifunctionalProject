@@ -4,6 +4,7 @@ import com.almod.flow.broker.TransferDataToBroker;
 import com.almod.flow.broker.activemq.ConstantsFlowBroker;
 import com.almod.flow.broker.activemq.entity.ActiveMQPersonalCard;
 import com.almod.flow.broker.activemq.entity.ServiceResponse;
+import com.almod.util.GeneratorUUID;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,14 +28,16 @@ public class ActiveMQController {
 
     @PostMapping("/activemq")
     public ResponseEntity<ServiceResponse> upload(@Valid @RequestBody ActiveMQPersonalCard clientRequest) {
-        LOGGER.info("Request received for ActiveMQ broker");
+        System.out.println(clientRequest.toString());
+        LOGGER.info(String.format("[%s] Request received for ActiveMQ broker", clientRequest.getUUID()));
+
         ResponseEntity<ServiceResponse> response;
 
         try {
-            LOGGER.info("Try to send a data to the queue " + ConstantsFlowBroker.ACTIVEMQ_FLOW_PERSONAL_CARD_QUEUE);
+            LOGGER.info(String.format("[%s] Try to send a data to the queue %s", clientRequest.getUUID(), ConstantsFlowBroker.ACTIVEMQ_FLOW_PERSONAL_CARD_QUEUE));
             transferDataToBroker.transferData(clientRequest, ConstantsFlowBroker.ACTIVEMQ_FLOW_PERSONAL_CARD_QUEUE);
         } catch (Exception e) {
-            LOGGER.warn("Bad request");
+            LOGGER.warn(String.format("[%s] Bad request", clientRequest.getUUID()));
             response = ResponseEntity.badRequest().body(new ServiceResponse(ServiceResponse.ServiceResponseStatus.e, e.getMessage()));
 
             return response;

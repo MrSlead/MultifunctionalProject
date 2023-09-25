@@ -1,7 +1,7 @@
 package com.almod.flow.broker;
 
 import com.almod.flow.broker.activemq.ObjectMapperSingleton;
-import com.almod.flow.broker.entity.AbstractClientRequest;
+import com.almod.flow.broker.entity.AbstractEntity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.jms.TextMessage;
 import org.slf4j.Logger;
@@ -19,17 +19,18 @@ public class TransferDataToBroker {
         this.jmsTemplate = jmsTemplate;
     }
 
-    public void transferData(AbstractClientRequest clientRequest, String queue) throws JsonProcessingException {
+    public void transferData(AbstractEntity clientRequest, String queue) throws JsonProcessingException {
         String clientRequestString = ObjectMapperSingleton.getCustomizedObjectMapper().writeValueAsString(clientRequest);
 
         jmsTemplate.send(queue, session -> {
             TextMessage textMessage = session.createTextMessage();
             textMessage.setText(clientRequestString);
+            textMessage.setStringProperty("UUID", clientRequest.getUUID());
             //textMessage.setStringProperty("clientRequestString", clientRequestString);
 
             return textMessage;
         });
 
-        LOGGER.info("The data has been successfully inserted into the queue: " + queue);
+        LOGGER.info(String.format("[%s] The data has been successfully inserted into the queue: %s", clientRequest.getUUID(), queue));
     }
 }

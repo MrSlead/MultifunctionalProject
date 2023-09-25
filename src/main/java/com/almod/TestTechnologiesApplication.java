@@ -8,8 +8,6 @@ public class TestTechnologiesApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TestTechnologiesApplication.class, args);
-
-        System.out.println("Hellodsfsd");
     }
 
 }
