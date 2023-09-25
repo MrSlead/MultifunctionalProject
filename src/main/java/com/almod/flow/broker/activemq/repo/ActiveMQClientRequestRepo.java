@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ActiveMQRequestClientRepo extends CrudRepository<ActiveMQClientRequest, Long> {
+public interface ActiveMQClientRequestRepo extends CrudRepository<ActiveMQClientRequest, Long> {
     List<ActiveMQClientRequest> findAll();
 }

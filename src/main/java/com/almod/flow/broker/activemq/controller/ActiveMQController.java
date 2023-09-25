@@ -35,7 +35,7 @@ public class ActiveMQController {
             LOGGER.info("Try to send a data to the queue");
             transferDataToBroker.transferData(clientRequest, "incoming.files");
         } catch (Exception e) {
-            LOGGER.info("Bad request");
+            LOGGER.warn("Bad request");
             response = ResponseEntity.badRequest().body(new ServiceResponse(ServiceResponse.ServiceResponseStatus.e, e.getMessage()));
 
             return response;
