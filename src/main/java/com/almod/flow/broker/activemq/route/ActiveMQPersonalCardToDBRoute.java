@@ -20,7 +20,7 @@ public class ActiveMQPersonalCardToDBRoute extends RouteBuilder {
          from("activemq:incoming.files")
                 .routeId("activemq-to-mysql")
                 .log("Try send a message to the db")
-                .bean(ActiveMQPersonalCardService.class, "save");
+                .bean(ActiveMQPersonalCardHandlerQueue.class, "save");
     }
 }
 
