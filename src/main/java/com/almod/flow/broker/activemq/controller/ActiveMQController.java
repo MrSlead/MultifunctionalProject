@@ -4,7 +4,6 @@ import com.almod.flow.broker.TransferDataToBroker;
 import com.almod.flow.broker.activemq.ConstantsFlowBroker;
 import com.almod.flow.broker.activemq.entity.ActiveMQPersonalCard;
 import com.almod.flow.broker.activemq.entity.ServiceResponse;
-import com.almod.util.GeneratorUUID;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

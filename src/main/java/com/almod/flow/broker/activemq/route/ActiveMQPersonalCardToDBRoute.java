@@ -1,7 +1,5 @@
 package com.almod.flow.broker.activemq.route;
 
-import com.almod.flow.broker.activemq.repo.ActiveMQPersonalCardRepo;
-import com.almod.flow.broker.activemq.service.ActiveMQPersonalCardService;
 import com.almod.flow.broker.activemq.util.ActiveMQPersonalCardHandlerQueue;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
