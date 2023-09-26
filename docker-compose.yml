@@ -3,15 +3,15 @@ services:
   activemq:
     container_name: activemq
     image: islandora/activemq:2
+    ports:
+      - "8161:8161"
+      - "61616:61616"
     environment:
       - ACTIVEMQ_USER=admin
       - ACTIVEMQ_PASSWORD=password
       - ACTIVEMQ_WEB_ADMIN_NAME=admin
       - ACTIVEMQ_WEB_ADMIN_PASSWORD=password
       - ACTIVEMQ_WEB_ADMIN_ROLES=admin
-    ports:
-      - "8161:8161"
-      - "61616:61616"
 
   database:
     container_name: db-mysql
@@ -23,6 +23,15 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: archive
 
+  hazelcast:
+    image: hazelcast/hazelcast
+    ports:
+      - "5701-5703:5701"
+    environment:
+      - HZ_CLUSTERNAME=test-technologies-hz
+    #volumes:
+    #  - ./hazelcast.yaml:/opt/hazelcast-jet/config/hazelcast.yaml
+
   my-app:
     build: ./
     ports:
@@ -30,3 +39,4 @@ services:
     depends_on:
       - activemq
       - database
+      - hazelcast
