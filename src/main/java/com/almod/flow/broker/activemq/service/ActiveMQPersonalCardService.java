@@ -1,6 +1,6 @@
 package com.almod.flow.broker.activemq.service;
 
-import com.almod.flow.broker.AbstractService;
+import com.almod.flow.broker.service.AbstractService;
 import com.almod.flow.broker.activemq.entity.ActiveMQPersonalCard;
 import com.almod.flow.broker.activemq.repo.ActiveMQPersonalCardRepo;
 import org.springframework.beans.factory.annotation.Autowired;

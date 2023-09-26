@@ -14,6 +14,7 @@ public class ActiveMQPersonalCardToDBRoute extends RouteBuilder {
         onException(Exception.class)
                 .handled(true)
                 .log(LoggingLevel.ERROR, "[${header.UUID}] Error when sending to the db: \n${exception.cause}")
+                .setHeader("textBody", simple("${body}"))
                 .setBody(simple("${exception.stacktrace}"))
                 .to("activemq:error");
 

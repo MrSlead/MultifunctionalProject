@@ -18,4 +18,26 @@ create table archive_seq (
     next_val bigint
 ) engine=InnoDB;
 
-INSERT INTO archive_seq values (1)
+insert into archive_seq values (1);
+
+
+
+
+drop table if exists error;
+
+drop table if exists error_seq;
+
+create table error (
+    id bigint not null,
+    date_time datetime(6),
+    uuid varchar(255),
+    error_text varchar(255),
+    error_detail text,
+    primary key (id)
+) engine=InnoDB;
+
+create table error_seq (
+    next_val bigint
+) engine=InnoDB;
+
+insert into error_seq values (1);
