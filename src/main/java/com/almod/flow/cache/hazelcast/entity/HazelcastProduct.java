@@ -21,7 +21,7 @@ public class HazelcastProduct implements AbstractEntity {
 
     private String name;
 
-    private LocalDateTime dateTime;
+    private LocalDateTime dateTimePurchase;
 
     @Lob
     @Column(length = 5000)

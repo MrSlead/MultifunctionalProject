@@ -10,7 +10,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TransferDataToBroker {
+public class TransferDataToBroker implements AbstractTransferDataToBroker<AbstractEntity, String> {
     private final Logger LOGGER = LoggerFactory.getLogger(TransferDataToBroker.class);
 
     private JmsTemplate jmsTemplate;
