@@ -33,6 +33,8 @@ public class AbstractServiceImpl<T, ID> implements AbstractService<T, ID> {
 
     @Override
     public Optional<T> save(T t) {
-        return (Optional<T>) Optional.of(repo.save(t));
+        if(t != null)
+            return Optional.of(repo.save(t));
+        else return Optional.of(t);
     }
 }

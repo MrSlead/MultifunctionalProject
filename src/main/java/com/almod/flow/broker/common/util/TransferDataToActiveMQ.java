@@ -1,5 +1,6 @@
 package com.almod.flow.broker.common.util;
 
+import com.almod.flow.broker.type.activemq.ConstantsFlowBroker;
 import com.almod.flow.broker.type.activemq.ObjectMapperSingleton;
 import com.almod.common.entity.AbstractEntity;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -20,6 +21,7 @@ public class TransferDataToActiveMQ implements AbstractTransferDataToBroker<Abst
     }
 
     public void transferData(AbstractEntity clientRequest, String queue) throws JsonProcessingException {
+        LOGGER.info(String.format("[%s] Try to send a data to the queue %s", clientRequest.getUUID(), ConstantsFlowBroker.ACTIVEMQ_FLOW_PERSONAL_CARD_QUEUE));
         String clientRequestString = ObjectMapperSingleton.getCustomizedObjectMapper().writeValueAsString(clientRequest);
 
         jmsTemplate.send(queue, session -> {

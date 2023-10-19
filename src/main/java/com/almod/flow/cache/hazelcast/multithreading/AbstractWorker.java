@@ -1,11 +1,10 @@
 package com.almod.flow.cache.hazelcast.multithreading;
 
-import com.almod.flow.cache.hazelcast.controller.HazelcastController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractWorker implements Worker {
-    private final Logger LOGGER = LoggerFactory.getLogger(HazelcastController.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(AbstractWorker.class);
 
     protected final Processor processor;
 

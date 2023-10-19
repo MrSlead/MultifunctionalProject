@@ -1,7 +1,9 @@
 package com.almod.flow.cache.common.util;
 
 import com.almod.common.entity.AbstractEntity;
+import com.almod.flow.broker.type.activemq.ObjectMapperSingleton;
 import com.almod.flow.cache.hazelcast.config.ClientConfigHazelcast;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hazelcast.map.IMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +22,13 @@ public class TransferDataToHazelcast implements AbstractTransferDataToCache<Abst
     }
 
     @Override
-    public void transferData(AbstractEntity entity) {
+    public void transferData(AbstractEntity entity) throws JsonProcessingException {
+        LOGGER.info("[{}] Try to send a data into the cache", entity.getUUID());
+
+        String clientRequestString = ObjectMapperSingleton.getCustomizedObjectMapper().writeValueAsString(entity);
         IMap<Object, Object> map = clientConfigHazelcast.getMap();
-        map.putAsync(entity.getUUID(), entity.toString()); // Асихронная вставка данных в мапу, что позволяет увеличить производительность в разы (Могут быть проблемы в согласованности данных)
-        LOGGER.info(String.format("[%s] Success inserted into the cache", entity.getUUID()));
+        map.putAsync(entity.getUUID(), clientRequestString); // Асихронная вставка данных в мапу, что позволяет увеличить производительность в разы (Могут быть проблемы в согласованности данных)
+
+        LOGGER.info("[{}] Success inserted into the cache", entity.getUUID());
     }
 }

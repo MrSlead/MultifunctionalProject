@@ -34,7 +34,6 @@ public class ActiveMQController {
         ResponseEntity<ServiceResponse> response;
 
         try {
-            LOGGER.info(String.format("[%s] Try to send a data to the queue %s", clientRequest.getUUID(), ConstantsFlowBroker.ACTIVEMQ_FLOW_PERSONAL_CARD_QUEUE));
             abstractTransferDataToBroker.transferData(clientRequest, ConstantsFlowBroker.ACTIVEMQ_FLOW_PERSONAL_CARD_QUEUE);
         } catch (Exception e) {
             LOGGER.warn(String.format("[%s] Bad request", clientRequest.getUUID()));

@@ -12,7 +12,7 @@ public class ObjectMapperSingleton {
 
     private ObjectMapperSingleton() {}
 
-    public static ObjectMapper getCustomizedObjectMapper() {
+    public static synchronized ObjectMapper getCustomizedObjectMapper() {
         if(objectMapper == null)
             return (objectMapper = JsonMapper.builder().addModule(new JavaTimeModule()).build());
         else

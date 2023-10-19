@@ -1,9 +1,11 @@
 package com.almod.flow.cache.hazelcast.multithreading;
 
+import com.almod.common.service.AbstractService;
 import com.almod.flow.cache.hazelcast.config.ClientConfigHazelcast;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -31,11 +33,17 @@ public class Processor implements Runnable {
 
     private ClientConfigHazelcast clientConfigHazelcast;
 
+    private AbstractService abstractService;
+
     @Autowired
     public void setClientConfigHazelcast(ClientConfigHazelcast clientConfigHazelcast) {
         this.clientConfigHazelcast = clientConfigHazelcast;
     }
 
+    @Autowired
+    public void setAbstractService(@Qualifier("HazelcastProductServiceImpl") AbstractService abstractService) {
+        this.abstractService = abstractService;
+    }
 
     @PostConstruct
     public void start() {
@@ -78,7 +86,7 @@ public class Processor implements Runnable {
             executorService = Executors.newFixedThreadPool(parallelism);
             
             for(int i = 0; i < parallelism; i++) {
-                Future<?> task = executorService.submit(new MapWorker(this));
+                Future<?> task = executorService.submit(new MapWorker(this, abstractService));
                 tasks.add(task);
             }
 

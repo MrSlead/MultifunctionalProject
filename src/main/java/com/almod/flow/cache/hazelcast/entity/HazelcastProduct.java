@@ -2,6 +2,7 @@ package com.almod.flow.cache.hazelcast.entity;
 
 import com.almod.common.entity.AbstractEntity;
 import com.almod.common.util.GeneratorUUID;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class HazelcastProduct implements AbstractEntity {
 
     private String name;
 
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dateTimePurchase;
 
     @Lob
