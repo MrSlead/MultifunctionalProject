@@ -9,13 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
-@Component
-public class TransferDataToBroker implements AbstractTransferDataToBroker<AbstractEntity, String> {
-    private final Logger LOGGER = LoggerFactory.getLogger(TransferDataToBroker.class);
+@Component("TransferDataToActiveMQ")
+public class TransferDataToActiveMQ implements AbstractTransferDataToBroker<AbstractEntity, String> {
+    private final Logger LOGGER = LoggerFactory.getLogger(TransferDataToActiveMQ.class);
 
     private JmsTemplate jmsTemplate;
 
-    public TransferDataToBroker(JmsTemplate jmsTemplate) {
+    public TransferDataToActiveMQ(JmsTemplate jmsTemplate) {
         this.jmsTemplate = jmsTemplate;
     }
 

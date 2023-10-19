@@ -15,7 +15,7 @@ public class ClientConfigHazelcast {
     public ClientConfigHazelcast() {
         ClientConfig clientConfig = new ClientConfig();
         clientConfig.setClusterName("test-technologies-hz");
-        clientConfig.getNetworkConfig().setSmartRouting(false);
+        clientConfig.getNetworkConfig().setSmartRouting(false); // Клиент установит только начальное соединение (В логах не будет спамма клиент стаститики)
 
         hazelcastInstance = HazelcastClient.newHazelcastClient(clientConfig);
     }

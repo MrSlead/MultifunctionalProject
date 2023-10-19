@@ -1,9 +1,10 @@
-package com.almod.flow.cache.hazelcast.processor;
+package com.almod.flow.cache.hazelcast.multithreading;
 
 import com.almod.flow.cache.hazelcast.config.ClientConfigHazelcast;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -21,8 +22,12 @@ public class Processor implements Runnable {
 
     private Thread thisThread;
     private volatile boolean started;
-    private volatile int keyProcessingWait = 500;
-    private int parallelism = 10;
+
+    @Value("${key.processing.wait}")
+    private volatile int keyProcessingWait;
+
+    @Value("${number.thread}")
+    private int parallelism;
 
     private ClientConfigHazelcast clientConfigHazelcast;
 
@@ -50,7 +55,7 @@ public class Processor implements Runnable {
     @PreDestroy
     public void stop() {
         if(!isStarted()) {
-            LOGGER.info("Not running");
+            LOGGER.info("Processor not running");
             return;
         }
         setStarted(false);
@@ -73,16 +78,15 @@ public class Processor implements Runnable {
             executorService = Executors.newFixedThreadPool(parallelism);
             
             for(int i = 0; i < parallelism; i++) {
-                Future<?> task = executorService.submit(new KeyWorker(this));
+                Future<?> task = executorService.submit(new MapWorker(this));
                 tasks.add(task);
             }
 
             TimeUnit.DAYS.sleep(Long.MAX_VALUE);
         } catch (Exception e) {
             e.printStackTrace();
-            
+            if(!Thread.currentThread().isInterrupted()) Thread.currentThread().interrupt();
             executorService.shutdown();
-
 
             for(Future task : tasks) {
                 if(!task.isDone()) task.cancel(true);
