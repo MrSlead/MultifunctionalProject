@@ -14,7 +14,7 @@
 В кэш Hazelcast сообщение попадает через HTTP запрос, затем при помощи многопоточности осуществляется вычитка документов и импорт в БД.
 
 
-###Используемый стек:
+### Используемый стек:
 - Spring Framework (Core, Boot, Data JPA)
 - Hibernate, MySQL
 - Apache Camel, JMS, ActiveMQ
