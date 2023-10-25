@@ -2,7 +2,6 @@ package com.almod.flow.cache.hazelcast.multithreading;
 
 import com.almod.common.service.AbstractService;
 import com.almod.flow.broker.type.activemq.ObjectMapperSingleton;
-import com.almod.flow.cache.hazelcast.controller.HazelcastController;
 import com.almod.flow.cache.hazelcast.entity.HazelcastProduct;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hazelcast.cp.lock.FencedLock;

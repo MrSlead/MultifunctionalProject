@@ -1,8 +1,8 @@
 package com.almod.flow.cache.common.util;
 
 import com.almod.common.util.AbstractTransferData;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.almod.flow.cache.common.entity.CacheEntity;
 
-public interface AbstractTransferDataToCache<T> extends AbstractTransferData{
-    void transferData(T t) throws JsonProcessingException;
+public interface AbstractTransferDataToCache extends AbstractTransferData{
+    void transferData(CacheEntity entity) throws Exception;
 }

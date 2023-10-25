@@ -1,8 +1,8 @@
 package com.almod.flow.cache.hazelcast.controller;
 
 import com.almod.common.entity.ServiceResponse;
+import com.almod.flow.cache.common.entity.CacheEntity;
 import com.almod.flow.cache.common.util.AbstractTransferDataToCache;
-import com.almod.flow.cache.hazelcast.entity.HazelcastProduct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,27 +13,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HazelcastController {
-    private final Logger LOGGER = LoggerFactory.getLogger(HazelcastController.class);
+public class CacheController {
+    private final Logger LOGGER = LoggerFactory.getLogger(CacheController.class);
 
-    @Qualifier("TransferDataToHazelcast")
     private AbstractTransferDataToCache abstractTransferDataToCache;
 
     @Autowired
-    public void setAbstractTransferDataToCache(AbstractTransferDataToCache abstractTransferDataToCache) {
+    public void setAbstractTransferDataToCache(@Qualifier("TransferDataToCache") AbstractTransferDataToCache abstractTransferDataToCache) {
         this.abstractTransferDataToCache = abstractTransferDataToCache;
     }
 
-    @PostMapping("/hazelcast")
-    public ResponseEntity<ServiceResponse> upload(@RequestBody HazelcastProduct hazelcastProduct) {
-        LOGGER.info(String.format("[%s] Request received for Hazelcast", hazelcastProduct.getUUID()));
+    @PostMapping("/cache")
+    public ResponseEntity<ServiceResponse> upload(@RequestBody CacheEntity cacheEntity) {
+        LOGGER.info(String.format("[%s] Request received for cache", cacheEntity.getUUID()));
 
         ResponseEntity<ServiceResponse> response;
 
         try {
-            abstractTransferDataToCache.transferData(hazelcastProduct);
+            abstractTransferDataToCache.transferData(cacheEntity);
         } catch (Exception e) {
-            LOGGER.warn(String.format("[%s] Bad request", hazelcastProduct.getUUID()));
+            LOGGER.warn(String.format("[%s] Bad request", cacheEntity.getUUID()));
             response = ResponseEntity.badRequest().body(new ServiceResponse(ServiceResponse.ServiceResponseStatus.e, e.getMessage()));
 
             return response;
