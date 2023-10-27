@@ -2,8 +2,8 @@ package com.almod.flow.cache.common.util;
 
 import com.almod.flow.cache.common.entity.CacheEntity;
 import com.almod.flow.cache.common.entity.HazelcastEntity;
-import com.almod.flow.cache.hazelcast.util.TransferDataToCacheFactory;
-import com.almod.flow.cache.hazelcast.util.TransferDataToCacheHazelcast;
+import com.almod.flow.cache.type.hazelcast.util.TransferDataToCacheFactory;
+import com.almod.flow.cache.type.hazelcast.util.TransferDataToCacheHazelcast;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

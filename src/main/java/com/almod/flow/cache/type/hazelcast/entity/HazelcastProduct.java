@@ -1,10 +1,12 @@
-package com.almod.flow.cache.hazelcast.entity;
+package com.almod.flow.cache.type.hazelcast.entity;
 
 import com.almod.common.util.GeneratorUUID;
 import com.almod.flow.cache.common.entity.HazelcastEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -21,12 +23,15 @@ public class HazelcastProduct implements HazelcastEntity {
     @JsonIgnore
     private String UUID = GeneratorUUID.getUUID();
 
+    @NotBlank(message = "The name cannot be null or empty")
     private String name;
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    @NotNull(message = "The dateTimePurchase cannot be null or empty")
     private LocalDateTime dateTimePurchase;
 
     @Lob
     @Column(length = 5000)
+    @NotBlank(message = "The description cannot be null or empty")
     private String description;
 }

@@ -1,9 +1,9 @@
-package com.almod.flow.cache.hazelcast.util;
+package com.almod.flow.cache.type.hazelcast.util;
 
 import com.almod.flow.broker.type.activemq.ObjectMapperSingleton;
 import com.almod.flow.cache.common.entity.CacheEntity;
 import com.almod.flow.cache.common.util.TransferDataToCache;
-import com.almod.flow.cache.hazelcast.config.ClientConfigHazelcast;
+import com.almod.flow.cache.type.hazelcast.config.ClientConfigHazelcast;
 import com.hazelcast.map.IMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

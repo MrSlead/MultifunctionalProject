@@ -1,4 +1,4 @@
-package com.almod.flow.cache.hazelcast.util;
+package com.almod.flow.cache.type.hazelcast.util;
 
 import com.almod.flow.cache.common.entity.CacheEntity;
 import com.almod.flow.cache.common.entity.HazelcastEntity;

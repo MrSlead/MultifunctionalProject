@@ -1,9 +1,8 @@
-package com.almod.flow.cache.hazelcast.multithreading;
+package com.almod.flow.cache.type.hazelcast.multithreading;
 
 import com.almod.common.service.AbstractService;
 import com.almod.flow.broker.type.activemq.ObjectMapperSingleton;
-import com.almod.flow.cache.hazelcast.entity.HazelcastProduct;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.almod.flow.cache.type.hazelcast.entity.HazelcastProduct;
 import com.hazelcast.cp.lock.FencedLock;
 import com.hazelcast.map.IMap;
 import org.slf4j.Logger;
@@ -57,7 +56,7 @@ public class MapWorker extends AbstractWorker {
 
                 LOGGER.info("[{}] Success inserted into the db", key);
             }
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             LOGGER.error("Error during deserialization for {}", object);
             e.printStackTrace();
         }

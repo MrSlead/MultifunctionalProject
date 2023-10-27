@@ -1,7 +1,7 @@
 package com.almod.flow.broker.type.activemq.entity;
 
-import com.almod.common.entity.AbstractEntity;
 import com.almod.common.util.GeneratorUUID;
+import com.almod.flow.broker.common.entity.ActiveMQEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @ToString(includeFieldNames = true)
 @Entity
 @Table(name = "archive")
-public class ActiveMQPersonalCard implements AbstractEntity {
+public class ActiveMQPersonalCard implements ActiveMQEntity {
     @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

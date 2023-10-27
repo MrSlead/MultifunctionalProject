@@ -1,4 +1,4 @@
-package com.almod.flow.cache.hazelcast.multithreading;
+package com.almod.flow.cache.type.hazelcast.multithreading;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.almod.flow.cache.hazelcast.config;
+package com.almod.flow.cache.type.hazelcast.config;
 
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;

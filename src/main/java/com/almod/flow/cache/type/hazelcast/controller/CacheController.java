@@ -1,8 +1,9 @@
-package com.almod.flow.cache.hazelcast.controller;
+package com.almod.flow.cache.type.hazelcast.controller;
 
 import com.almod.common.entity.ServiceResponse;
 import com.almod.flow.cache.common.entity.CacheEntity;
 import com.almod.flow.cache.common.util.AbstractTransferDataToCache;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class CacheController {
     }
 
     @PostMapping("/cache")
-    public ResponseEntity<ServiceResponse> upload(@RequestBody CacheEntity cacheEntity) {
+    public ResponseEntity<ServiceResponse> upload(@Valid @RequestBody CacheEntity cacheEntity) {
         LOGGER.info(String.format("[%s] Request received for cache", cacheEntity.getUUID()));
 
         ResponseEntity<ServiceResponse> response;

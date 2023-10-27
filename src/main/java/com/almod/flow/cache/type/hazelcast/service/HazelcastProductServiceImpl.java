@@ -1,8 +1,8 @@
-package com.almod.flow.cache.hazelcast.service;
+package com.almod.flow.cache.type.hazelcast.service;
 
 import com.almod.common.service.AbstractServiceImpl;
-import com.almod.flow.cache.hazelcast.entity.HazelcastProduct;
-import com.almod.flow.cache.hazelcast.repo.HazelcastProductRepo;
+import com.almod.flow.cache.type.hazelcast.entity.HazelcastProduct;
+import com.almod.flow.cache.type.hazelcast.repo.HazelcastProductRepo;
 import org.springframework.stereotype.Service;
 
 @Service("HazelcastProductServiceImpl")

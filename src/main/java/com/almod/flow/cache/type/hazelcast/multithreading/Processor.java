@@ -1,7 +1,7 @@
-package com.almod.flow.cache.hazelcast.multithreading;
+package com.almod.flow.cache.type.hazelcast.multithreading;
 
 import com.almod.common.service.AbstractService;
-import com.almod.flow.cache.hazelcast.config.ClientConfigHazelcast;
+import com.almod.flow.cache.type.hazelcast.config.ClientConfigHazelcast;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
