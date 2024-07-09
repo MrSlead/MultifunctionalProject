@@ -2,7 +2,7 @@ package com.almod.flow.cache.hazelcast.worker;
 
 import com.almod.store.service.AbstractService;
 import com.almod.util.ObjectMapperSingleton;
-import com.almod.store.entity.cache.hazelcast.HazelcastProduct;
+import com.almod.store.entity.cache.hazelcast.HazelcastProductEntity;
 import com.hazelcast.cp.lock.FencedLock;
 import com.hazelcast.map.IMap;
 import org.slf4j.Logger;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class MapWorker extends AbstractWorker {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(MapWorker.class);
+    private final Logger logger = LoggerFactory.getLogger(MapWorker.class);
 
     private AbstractService abstractService;
 
@@ -22,7 +22,7 @@ public class MapWorker extends AbstractWorker {
     }
 
     public void work() {
-        IMap<Object, Object> map = processor.getClientConfigHazelcast().getMap();
+        IMap<Object, Object> map = processor.getClientConfigHazelcast().getCacheMap();
         for(Map.Entry<Object, Object> mapEntry : map.entrySet()) {
             FencedLock keyLock = processor.getClientConfigHazelcast().getHazelcastInstance().getCPSubsystem().getLock(String.valueOf(mapEntry.getKey()));
             if(keyLock.tryLock()) {
@@ -36,7 +36,7 @@ public class MapWorker extends AbstractWorker {
                             break;
                         }
                     } catch (Exception e) {
-                        LOGGER.error("Error unlock key = {}", mapEntry.getKey());
+                        logger.error("Error unlock key = {}", mapEntry.getKey());
                     }
                 }
             }
@@ -44,21 +44,20 @@ public class MapWorker extends AbstractWorker {
     }
 
     private void keyProcessing(Object key) {
-        LOGGER.info("[{}] Try get data from cache", key);
+        logger.info("[{}] Try get data from cache", key);
 
-        String object = (String) processor.getClientConfigHazelcast().getMap().get(key);
-        LOGGER.info("[{}] Data: {}", key, object);
+        String object = (String) processor.getClientConfigHazelcast().getCacheMap().get(key);
+        logger.info("[{}] Data: {}", key, object);
 
         try {
             if(!(object == null || object.isEmpty())) {
-                HazelcastProduct hazelcastProduct = ObjectMapperSingleton.getCustomizedObjectMapper().readValue(object, HazelcastProduct.class);
-                abstractService.save(hazelcastProduct);
+                HazelcastProductEntity hazelcastProductEntity = ObjectMapperSingleton.getCustomizedObjectMapper().readValue(object, HazelcastProductEntity.class);
+                abstractService.save(hazelcastProductEntity);
 
-                LOGGER.info("[{}] Success inserted into the db", key);
+                logger.info("[{}] Success inserted into the db", key);
             }
         } catch (Exception e) {
-            LOGGER.error("Error during deserialization for {}", object);
-            e.printStackTrace();
+            logger.error("Error during deserialization for {}", object, e);
         }
     }
 }

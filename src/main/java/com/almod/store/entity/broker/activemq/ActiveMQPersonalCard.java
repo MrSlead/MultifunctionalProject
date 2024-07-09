@@ -6,40 +6,42 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@ToString(includeFieldNames = true)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "archive")
 public class ActiveMQPersonalCard implements ActiveMQEntity {
     @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    Long id;
 
     @JsonIgnore
-    private String UUID = GeneratorUUID.getUUID();
+    String UUID = GeneratorUUID.getUUID();
 
     @NotBlank(message = "The firstname cannot be null or empty")
-    private String firstName;
+    String firstName;
 
     @NotBlank(message = "The lastName cannot be null or empty")
-    private String lastName;
+    String lastName;
 
     @NotBlank(message = "The patronymic cannot be null or empty")
-    private String patronymic;
+    String patronymic;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dateOfBirth;
+    LocalDate dateOfBirth;
 
     @NotBlank(message = "The serialNumber cannot be null or empty")
-    private String serialNumber;
+    String serialNumber;
 
     @NotBlank(message = "The place Of residence cannot be null or empty")
-    private String placeOfResidence;
+    String placeOfResidence;
 }

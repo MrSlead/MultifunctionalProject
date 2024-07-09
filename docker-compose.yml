@@ -28,7 +28,7 @@ services:
     ports:
       - "5701-5703:5701"
     environment:
-      - HZ_CLUSTERNAME=test-technologies-hz
+      - HZ_CLUSTERNAME=MultifunctionalProject
     #volumes:
     #  - ./hazelcast.yaml:/opt/hazelcast-jet/config/hazelcast.yaml
 

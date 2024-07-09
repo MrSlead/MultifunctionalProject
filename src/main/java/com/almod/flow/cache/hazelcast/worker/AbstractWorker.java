@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractWorker implements Worker {
-    private final Logger LOGGER = LoggerFactory.getLogger(AbstractWorker.class);
+    private final Logger logger = LoggerFactory.getLogger(AbstractWorker.class);
 
     protected final Processor processor;
 
@@ -14,20 +14,20 @@ public abstract class AbstractWorker implements Worker {
 
     @Override
     public void run() {
-        LOGGER.info("Starting Thread {}", Thread.currentThread().getName());
-        while(processor.isStarted()) {
+        logger.info("Starting Thread {}", Thread.currentThread().getName());
+        while (!Thread.currentThread().isInterrupted() && processor.isStarted()) {
             try {
                 try {
                     work();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error(e.getMessage(), e);
                 }
-                if(processor.getKeyProcessingWait() > 0) {
+                if (processor.getKeyProcessingWait() > 0) {
                     Thread.sleep(processor.getKeyProcessingWait());
                 }
             } catch (InterruptedException e) {
-                if(!Thread.currentThread().isInterrupted()) Thread.currentThread().interrupt();
-                LOGGER.error("Stopped Thread {}", Thread.currentThread().getName());
+                if (!Thread.currentThread().isInterrupted()) Thread.currentThread().interrupt();
+                logger.error("Stopped Thread {}", Thread.currentThread().getName());
             }
         }
     }

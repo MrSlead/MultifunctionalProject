@@ -8,14 +8,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
  * Singleton класса ObjectMapper для работы с LocalDate при серилизации/десерилизации json
  */
 public class ObjectMapperSingleton {
-    private static ObjectMapper objectMapper;
+    private static final ObjectMapper objectMapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();
 
-    private ObjectMapperSingleton() {}
-
-    public static synchronized ObjectMapper getCustomizedObjectMapper() {
-        if(objectMapper == null)
-            return (objectMapper = JsonMapper.builder().addModule(new JavaTimeModule()).build());
-        else
-            return objectMapper;
+    public static ObjectMapper getCustomizedObjectMapper() {
+        return objectMapper;
     }
 }

@@ -10,16 +10,13 @@
     </parent>
 
     <groupId>com.almod</groupId>
-    <artifactId>test-technologies</artifactId>
-    <version>1.1.0</version>
-    <name>test-technologies</name>
-    <description>test-technologies</description>
+    <artifactId>MultifunctionalProject</artifactId>
+    <version>1.1.1</version>
 
     <properties>
         <java.version>16</java.version>
         <spring.version>4.0.0</spring.version>
     </properties>
-
 
 
     <dependencies>
@@ -109,8 +106,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>16</source>
-                    <target>16</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
         </plugins>

@@ -6,31 +6,36 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Data
 @Table(name = "products")
-public class HazelcastProduct implements HazelcastEntity {
+public class HazelcastProductEntity implements HazelcastEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
-    private Long id;
+    Long id;
 
     @JsonIgnore
-    private String UUID = GeneratorUUID.getUUID();
+    String UUID = GeneratorUUID.getUUID();
 
     @NotBlank(message = "The name cannot be null or empty")
-    private String name;
+    String name;
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     @NotNull(message = "The dateTimePurchase cannot be null or empty")
-    private LocalDateTime dateTimePurchase;
+    LocalDateTime dateTimePurchase;
 
     @Lob
     @Column(length = 5000)
     @NotBlank(message = "The description cannot be null or empty")
-    private String description;
+    String description;
 }

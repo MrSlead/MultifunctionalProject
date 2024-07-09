@@ -5,7 +5,7 @@ import com.almod.store.repository.AbstractRepo;
 import java.util.List;
 import java.util.Optional;
 
-public class AbstractServiceImpl<T, ID> implements AbstractService<T, ID> {
+public abstract class AbstractServiceImpl<T, ID> implements AbstractService<T, ID> {
     private AbstractRepo<T, ID> repo;
 
     public AbstractServiceImpl(AbstractRepo<T, ID> repo) {

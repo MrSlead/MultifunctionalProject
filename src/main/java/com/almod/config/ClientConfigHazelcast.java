@@ -12,17 +12,17 @@ public class ClientConfigHazelcast {
     @Getter
     private final HazelcastInstance hazelcastInstance;
 
-    private final String map = "CACHE_MAP";
+    private final String cacheMap = "CACHE_MAP";
 
     public ClientConfigHazelcast() {
         ClientConfig clientConfig = new ClientConfig();
-        clientConfig.setClusterName("test-technologies-hz");
+        clientConfig.setClusterName("MultifunctionalProject");
         clientConfig.getNetworkConfig().setSmartRouting(false); // Клиент установит только начальное соединение (В логах не будет спамма клиент стаститики)
 
         hazelcastInstance = HazelcastClient.newHazelcastClient(clientConfig);
     }
 
-    public IMap<Object, Object> getMap() {
-        return hazelcastInstance.getMap(map);
+    public IMap<Object, Object> getCacheMap() {
+        return hazelcastInstance.getMap(cacheMap);
     }
 }
