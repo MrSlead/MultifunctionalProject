@@ -5,7 +5,7 @@ drop table if exists products_seq;
 create table products (
     id bigint not null,
     uuid varchar(255),
-    date_time_purchase datetime(6),
+    date_time_purchase datetime(6) not null,
     name varchar(255),
     description text,
     primary key (id)

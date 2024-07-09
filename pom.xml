@@ -11,12 +11,12 @@
 
     <groupId>com.almod</groupId>
     <artifactId>test-technologies</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.1.0</version>
     <name>test-technologies</name>
     <description>test-technologies</description>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>16</java.version>
         <spring.version>4.0.0</spring.version>
     </properties>
 
