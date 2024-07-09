@@ -1,7 +1,7 @@
 package com.almod.flow.broker.activemq;
 
 import com.almod.flow.broker.TransferDataToBroker;
-import com.almod.flow.broker.activemq.util.ConstantsFlowBroker;
+import com.almod.flow.broker.ConstantsFlowBroker;
 import com.almod.store.entity.broker.BrokerEntity;
 import com.almod.util.ObjectMapperSingleton;
 import com.fasterxml.jackson.core.JsonProcessingException;

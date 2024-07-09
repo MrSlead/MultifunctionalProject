@@ -1,8 +1,16 @@
 package com.almod.api;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.ToString;
+import lombok.experimental.FieldDefaults;
+
+@Getter
+@ToString
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ServiceResponse  {
-    private final String status;
-    private final String errorMsg;
+    String status;
+    String errorMsg;
 
     public ServiceResponse(ServiceResponseStatus status) {
         this(status, "");
@@ -11,22 +19,6 @@ public class ServiceResponse  {
     public ServiceResponse(ServiceResponseStatus status, String errorMsg) {
         this.status = status.toString();
         this.errorMsg = errorMsg;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public String getErrorMsg() {
-        return errorMsg;
-    }
-
-    @Override
-    public String toString() {
-        return "ServiceResponse{" +
-                "status='" + status + '\'' +
-                ", errorMsg='" + errorMsg + '\'' +
-                '}';
     }
 
     public enum ServiceResponseStatus {

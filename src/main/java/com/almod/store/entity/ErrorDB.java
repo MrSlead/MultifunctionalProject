@@ -1,24 +1,31 @@
 package com.almod.store.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "error")
 public class ErrorDB implements AbstractEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private Long id;
+    Long id;
 
-    private LocalDateTime dateTime;
+    LocalDateTime dateTime;
 
-    private String UUID;
+    String UUID;
 
-    private String errorText;
+    String errorText;
 
     @Lob
     @Column(length = 65535)
-    private String errorDetail;
+    String errorDetail;
 }

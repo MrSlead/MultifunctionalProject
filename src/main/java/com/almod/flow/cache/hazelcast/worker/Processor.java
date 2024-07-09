@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class Processor implements Runnable {
-    public static final Logger LOGGER = LoggerFactory.getLogger(Processor.class);
+    public static final Logger logger = LoggerFactory.getLogger(Processor.class);
 
     private Thread thisThread;
     private volatile boolean started;
@@ -48,7 +48,7 @@ public class Processor implements Runnable {
     @PostConstruct
     public void start() {
         if(isStarted()) {
-            LOGGER.info("Already running");
+            logger.info("Already running");
             return;
         }
 
@@ -57,13 +57,13 @@ public class Processor implements Runnable {
         thisThread.start();
         setStarted(true);
 
-        LOGGER.info("Processor has started");
+        logger.info("Processor has started");
     }
 
     @PreDestroy
     public void stop() {
         if(!isStarted()) {
-            LOGGER.info("Processor not running");
+            logger.info("Processor not running");
             return;
         }
         setStarted(false);
@@ -72,9 +72,9 @@ public class Processor implements Runnable {
         try {
             thisThread.join();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
-        LOGGER.info("Processor has stopped");
+        logger.info("Processor has stopped");
     }
 
     @Override
@@ -82,7 +82,7 @@ public class Processor implements Runnable {
         ExecutorService executorService = null;
         List<Future> tasks = new ArrayList<>();
         try {
-            LOGGER.info("Processor starting, number of threads = {}", parallelism);
+            logger.info("Number of threads = {}", parallelism);
             executorService = Executors.newFixedThreadPool(parallelism);
             
             for(int i = 0; i < parallelism; i++) {
@@ -92,7 +92,7 @@ public class Processor implements Runnable {
 
             TimeUnit.DAYS.sleep(Long.MAX_VALUE);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
             if(!Thread.currentThread().isInterrupted()) Thread.currentThread().interrupt();
             executorService.shutdown();
 
