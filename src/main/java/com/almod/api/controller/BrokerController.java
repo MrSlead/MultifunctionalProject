@@ -1,6 +1,6 @@
 package com.almod.api.controller;
 
-import com.almod.api.ServiceResponse;
+import com.almod.api.util.ResponseUtils;
 import com.almod.flow.AbstractTransferData;
 import com.almod.store.entity.broker.BrokerEntity;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Tag(name="Broker's flow", description="The flow for uploading data to the broker")
 public class BrokerController {
-    private final Logger LOGGER = LoggerFactory.getLogger(BrokerController.class);
+    private final Logger logger = LoggerFactory.getLogger(BrokerController.class);
 
     private AbstractTransferData abstractTransferData;
 
@@ -29,20 +29,20 @@ public class BrokerController {
     public static final String BROKER_FLOW = "/api/flow/broker/upload";
 
     @PostMapping(BROKER_FLOW)
-    public ResponseEntity<ServiceResponse> upload(@Valid @RequestBody BrokerEntity clientRequest) {
-        LOGGER.info(String.format("[%s] Request received for broker", clientRequest.getUUID()));
+    public ResponseEntity<?> upload(@Valid @RequestBody BrokerEntity clientRequest) {
+        logger.info("[{}] Request received for broker", clientRequest.getUUID());
 
-        ResponseEntity<ServiceResponse> response;
+        ResponseEntity<?> response;
 
         try {
             abstractTransferData.transferData(clientRequest);
         } catch (Exception e) {
-            LOGGER.warn(String.format("[%s] Bad request: {}", clientRequest.getUUID()), e);
-            response = ResponseEntity.badRequest().body(new ServiceResponse(ServiceResponse.ServiceResponseStatus.e, e.getMessage()));
+            logger.warn("[{}] Bad request: ", clientRequest.getUUID(), e);
+            response = ResponseUtils.createErrorResponse(e);
 
             return response;
         }
-        response = ResponseEntity.ok().body(new ServiceResponse(ServiceResponse.ServiceResponseStatus.s));
+        response = ResponseUtils.createOkResponse();
 
         return response;
     }

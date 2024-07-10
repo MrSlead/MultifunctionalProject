@@ -1,4 +1,4 @@
-package com.almod.api;
+package com.almod.api.response;
 
 import lombok.AccessLevel;
 import lombok.Getter;

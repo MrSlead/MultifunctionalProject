@@ -1,6 +1,6 @@
 package com.almod.flow.broker.activemq.route;
 
-import com.almod.flow.broker.activemq.util.ActiveMQPersonalCardHandlerQueue;
+import com.almod.flow.broker.activemq.infrastructure.ActiveMQPersonalCardHandlerQueue;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;

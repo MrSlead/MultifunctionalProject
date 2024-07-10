@@ -1,4 +1,4 @@
-package com.almod.flow.broker.activemq.util;
+package com.almod.flow.broker.activemq.infrastructure;
 
 import com.almod.util.ObjectMapperSingleton;
 import com.almod.store.entity.broker.activemq.ActiveMQPersonalCardEntity;

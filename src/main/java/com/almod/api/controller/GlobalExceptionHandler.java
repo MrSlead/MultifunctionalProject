@@ -1,7 +1,7 @@
 package com.almod.api.controller;
 
-import com.almod.api.ValidationErrorResponse;
-import com.almod.api.Violation;
+import com.almod.api.response.ValidationErrorResponse;
+import com.almod.api.response.Violation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -16,15 +16,15 @@ import java.util.stream.Collectors;
  * Для проверки переменных пути и параметров необходимо добавить обработчик ошибки ConstraintViolationException.class
  */
 @ControllerAdvice
-public class ErrorHandlingControllerAdvice {
+public class GlobalExceptionHandler {
 
-    final private Logger LOGGER = LoggerFactory.getLogger(ErrorHandlingControllerAdvice.class);
+    final private Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ResponseBody
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ValidationErrorResponse onMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        LOGGER.error(e.getMessage(), e);
+        logger.error(e.getMessage(), e);
         final List<Violation> violations = e.getBindingResult().getFieldErrors().stream()
                 .map(error -> new Violation(error.getField(), error.getDefaultMessage()))
                 .collect(Collectors.toList());

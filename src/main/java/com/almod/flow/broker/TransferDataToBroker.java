@@ -20,12 +20,8 @@ public class TransferDataToBroker implements AbstractTransferData<BrokerEntity> 
 
     @Override
     public void transferData(BrokerEntity brokerEntity) {
-        logger.info("[{}] Try to send a data into the broker", brokerEntity.getUUID());
-
         TransferDataToBroker instance = transferDataToBrokerFactory.getDependenceForTransferData(brokerEntity);
         instance.transferData(brokerEntity);
-
-        logger.info("[{}] Success inserted into the broker", brokerEntity.getUUID());
     }
 
 }
