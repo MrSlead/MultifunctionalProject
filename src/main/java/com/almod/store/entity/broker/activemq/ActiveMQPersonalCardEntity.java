@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "archive")
-public class ActiveMQPersonalCard implements ActiveMQEntity {
+public class ActiveMQPersonalCardEntity implements ActiveMQEntity {
     @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

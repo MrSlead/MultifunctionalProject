@@ -1,6 +1,6 @@
 package com.almod.flow.broker;
 
-import com.almod.store.entity.ErrorDB;
+import com.almod.store.entity.ErrorDBEntity;
 import com.almod.store.service.broker.ErrorDBService;
 import org.apache.camel.Exchange;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +19,16 @@ public class ErrorDBHandlerQueue {
         this.errorDBService = errorDBService;
     }
 
-    public Optional<ErrorDB> save(Exchange exchange) {
-        ErrorDB errorDB = new ErrorDB();
+    public Optional<ErrorDBEntity> save(Exchange exchange) {
+        ErrorDBEntity errorDBEntity = new ErrorDBEntity();
         Date date = new Date((Long) exchange.getIn().getHeader("JMSTimestamp"));
 
-        errorDB.setDateTime(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
-        errorDB.setErrorText(exchange.getIn().getBody().toString().substring(0, 255));
-        errorDB.setErrorDetail(exchange.getIn().getBody().toString());
-        errorDB.setUUID(exchange.getIn().getHeader("UUID").toString());
+        errorDBEntity.builder()
+                .dateTime(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime())
+                .errorText(exchange.getIn().getBody().toString().substring(0, 255))
+                .errorDetail(exchange.getIn().getBody().toString())
+                .UUID(exchange.getIn().getHeader("UUID").toString());
 
-        return errorDBService.save(errorDB);
+        return errorDBService.save(errorDBEntity);
     }
 }

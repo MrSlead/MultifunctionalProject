@@ -27,9 +27,15 @@ services:
     image: hazelcast/hazelcast
     ports:
       - "5701-5703:5701"
+      - "1097-1099:1099"
+    deploy:
+      replicas: 3
     environment:
       - HZ_CLUSTERNAME=MultifunctionalProject
-    #volumes:
+      # Чтобы были доступны все 3 ноды по JMX, нужно как-то установить сюда rmi.port=1099 порты из хоста 1097-1099
+      - JAVA_OPTS=-Dhazelcast.jmx=true -Dcom.sun.management.jmxremote.port=1099 -Dcom.sun.management.jmxremote.rmi.port=1099 -Djava.rmi.server.hostname=localhost -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false
+    # volumes:
+    # Собственная конфигурация
     #  - ./hazelcast.yaml:/opt/hazelcast-jet/config/hazelcast.yaml
 
   my-app:
