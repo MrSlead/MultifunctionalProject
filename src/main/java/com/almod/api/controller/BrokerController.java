@@ -3,6 +3,7 @@ package com.almod.api.controller;
 import com.almod.api.ServiceResponse;
 import com.almod.flow.AbstractTransferData;
 import com.almod.store.entity.broker.BrokerEntity;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Tag(name="Broker's flow", description="The flow for uploading data to the broker")
 public class BrokerController {
-
     private final Logger LOGGER = LoggerFactory.getLogger(BrokerController.class);
 
     private AbstractTransferData abstractTransferData;
@@ -25,7 +26,9 @@ public class BrokerController {
         this.abstractTransferData = abstractTransferData;
     }
 
-    @PostMapping("/broker")
+    public static final String BROKER_FLOW = "/api/flow/broker/upload";
+
+    @PostMapping(BROKER_FLOW)
     public ResponseEntity<ServiceResponse> upload(@Valid @RequestBody BrokerEntity clientRequest) {
         LOGGER.info(String.format("[%s] Request received for broker", clientRequest.getUUID()));
 
