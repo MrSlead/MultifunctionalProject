@@ -20,11 +20,7 @@ public class TransferDataToCache implements AbstractTransferData<CacheEntity> {
 
     @Override
     public void transferData(CacheEntity cacheEntity) {
-        logger.info("[{}] Try to send a data into the cache", cacheEntity.getUUID());
-
         TransferDataToCache instance = transferDataToCacheFactory.getDependenceForTransferData(cacheEntity);
         instance.transferData(cacheEntity);
-
-        logger.info("[{}] Success inserted into the cache", cacheEntity.getUUID());
     }
 }

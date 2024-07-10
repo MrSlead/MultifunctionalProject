@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Component("TransferDataToBrokerActiveMQ")
 public class TransferDataToBrokerActiveMQ extends TransferDataToBroker {
-    private final Logger LOGGER = LoggerFactory.getLogger(TransferDataToBrokerActiveMQ.class);
+    private final Logger logger = LoggerFactory.getLogger(TransferDataToBrokerActiveMQ.class);
 
     private JmsTemplate jmsTemplate;
 
@@ -29,16 +29,15 @@ public class TransferDataToBrokerActiveMQ extends TransferDataToBroker {
             String clientRequestString = ObjectMapperSingleton.getCustomizedObjectMapper().writeValueAsString(activemqEntity);
 
             String queue = ConstantsFlowBroker.ACTIVEMQ_FLOW_PERSONAL_CARD_QUEUE;
-            LOGGER.info(String.format("[%s] Try to send a data to the queue %s", activemqEntity.getUUID(), queue));
+            logger.info("[{}] Try to send a data to the queue {}", activemqEntity.getUUID(), queue);
             jmsTemplate.send(queue, session -> {
                 TextMessage textMessage = session.createTextMessage();
                 textMessage.setText(clientRequestString);
                 textMessage.setStringProperty("UUID", activemqEntity.getUUID());
-                //textMessage.setStringProperty("clientRequestString", clientRequestString);
 
                 return textMessage;
             });
-            LOGGER.info(String.format("[%s] The data has been successfully inserted into the queue: %s", activemqEntity.getUUID(), queue));
+            logger.info("[{}] The data has been successfully inserted into the queue: {}", activemqEntity.getUUID(), queue);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

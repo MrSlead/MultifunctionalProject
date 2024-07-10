@@ -1,6 +1,6 @@
 package com.almod.api.controller;
 
-import com.almod.api.ServiceResponse;
+import com.almod.api.util.ResponseUtils;
 import com.almod.flow.AbstractTransferData;
 import com.almod.store.entity.cache.CacheEntity;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Tag(name="Cache's flow", description="The flow for uploading data to the cache")
 public class CacheController {
-    private final Logger LOGGER = LoggerFactory.getLogger(CacheController.class);
+    private final Logger logger = LoggerFactory.getLogger(CacheController.class);
 
     private AbstractTransferData abstractTransferData;
 
@@ -29,21 +29,21 @@ public class CacheController {
     public static final String CACHE_FLOW = "/api/flow/cache/upload";
 
     @PostMapping(CACHE_FLOW)
-    public ResponseEntity<ServiceResponse> upload(@Valid @RequestBody CacheEntity cacheEntity) {
-        LOGGER.info(String.format("[%s] Request received for cache", cacheEntity.getUUID()));
+    public ResponseEntity<?> upload(@Valid @RequestBody CacheEntity cacheEntity) {
+        logger.info("[{}] Request received for cache", cacheEntity.getUUID());
 
-        ResponseEntity<ServiceResponse> response;
+        ResponseEntity<?> response;
 
         try {
             abstractTransferData.transferData(cacheEntity);
         } catch (Exception e) {
-            LOGGER.warn(String.format("[%s] Bad request", cacheEntity.getUUID()));
-            response = ResponseEntity.badRequest().body(new ServiceResponse(ServiceResponse.ServiceResponseStatus.e, e.getMessage()));
+            logger.warn("[{}] Bad request", cacheEntity.getUUID(), e);
+            response = ResponseUtils.createErrorResponse(e);
 
             return response;
         }
 
-        response = ResponseEntity.ok().body(new ServiceResponse(ServiceResponse.ServiceResponseStatus.s));
+        response = ResponseUtils.createOkResponse();
 
         return response;
     }

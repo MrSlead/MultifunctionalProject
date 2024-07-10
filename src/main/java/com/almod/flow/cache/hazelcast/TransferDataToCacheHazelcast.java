@@ -25,9 +25,13 @@ public class TransferDataToCacheHazelcast extends TransferDataToCache {
     public void transferData(CacheEntity cacheEntity)  {
         String clientRequestString = null;
         try {
+            logger.info("[{}] Try to send a data into the hazelcast", cacheEntity.getUUID());
+
             clientRequestString = ObjectMapperSingleton.getCustomizedObjectMapper().writeValueAsString(cacheEntity);
             IMap<Object, Object> map = clientConfigHazelcast.getCacheMap();
             map.put(cacheEntity.getUUID(), clientRequestString);
+
+            logger.info("[{}] Success inserted into the hazelcast", cacheEntity.getUUID());
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
