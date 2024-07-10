@@ -11,10 +11,10 @@
 
     <groupId>com.almod</groupId>
     <artifactId>MultifunctionalProject</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
 
     <properties>
-        <java.version>16</java.version>
+        <java.version>17</java.version>
         <spring.version>4.0.0</spring.version>
     </properties>
 

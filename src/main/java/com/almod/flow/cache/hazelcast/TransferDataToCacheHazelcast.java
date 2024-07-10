@@ -27,7 +27,7 @@ public class TransferDataToCacheHazelcast extends TransferDataToCache {
         try {
             clientRequestString = ObjectMapperSingleton.getCustomizedObjectMapper().writeValueAsString(cacheEntity);
             IMap<Object, Object> map = clientConfigHazelcast.getCacheMap();
-            map.putAsync(cacheEntity.getUUID(), clientRequestString); // Асихронная вставка данных в мапу, что позволяет увеличить производительность в разы (Могут быть проблемы в согласованности данных)
+            map.put(cacheEntity.getUUID(), clientRequestString);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }

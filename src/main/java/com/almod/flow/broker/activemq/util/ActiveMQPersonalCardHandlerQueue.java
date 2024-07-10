@@ -1,7 +1,7 @@
 package com.almod.flow.broker.activemq.util;
 
 import com.almod.util.ObjectMapperSingleton;
-import com.almod.store.entity.broker.activemq.ActiveMQPersonalCard;
+import com.almod.store.entity.broker.activemq.ActiveMQPersonalCardEntity;
 import com.almod.store.service.broker.activemq.ActiveMQPersonalCardService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.camel.Exchange;
@@ -20,11 +20,11 @@ public class ActiveMQPersonalCardHandlerQueue {
         this.service = service;
     }
 
-    public Optional<ActiveMQPersonalCard> save(Exchange exchange) throws JsonProcessingException {
+    public Optional<ActiveMQPersonalCardEntity> save(Exchange exchange) throws JsonProcessingException {
         Message message = exchange.getIn();
         String clientRequestString = message.getBody().toString();
-        ActiveMQPersonalCard activeMQPersonalCard = ObjectMapperSingleton.getCustomizedObjectMapper().readValue(clientRequestString, ActiveMQPersonalCard.class);
+        ActiveMQPersonalCardEntity activeMQPersonalCardEntity = ObjectMapperSingleton.getCustomizedObjectMapper().readValue(clientRequestString, ActiveMQPersonalCardEntity.class);
 
-        return service.save(activeMQPersonalCard);
+        return service.save(activeMQPersonalCardEntity);
     }
 }

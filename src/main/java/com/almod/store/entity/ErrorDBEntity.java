@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "error")
-public class ErrorDB implements AbstractEntity {
+public class ErrorDBEntity implements AbstractEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     Long id;

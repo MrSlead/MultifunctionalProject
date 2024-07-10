@@ -47,7 +47,7 @@ public class MapWorker extends AbstractWorker {
         logger.info("[{}] Try get data from cache", key);
 
         String object = (String) processor.getClientConfigHazelcast().getCacheMap().get(key);
-        logger.info("[{}] Data: {}", key, object);
+        logger.debug("[{}] Data: {}", key, object);
 
         try {
             if(!(object == null || object.isEmpty())) {
