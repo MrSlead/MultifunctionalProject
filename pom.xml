@@ -14,7 +14,7 @@
     <version>1.1.1</version>
 
     <properties>
-        <java.version>16</java.version>
+        <java.version>17</java.version>
         <spring.version>4.0.0</spring.version>
     </properties>
 
