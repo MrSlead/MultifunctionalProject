@@ -24,7 +24,7 @@ public class VacationHandlerQueue {
         Message message = exchange.getIn();
         String clientRequestString = message.getBody().toString();
         VacationEntity vacationEntity = ObjectMapperSingleton.getCustomizedObjectMapper().readValue(clientRequestString, VacationEntity.class);
-        vacationEntity.getActiveMQEmployeeEntity().getVacationEntityList().add(vacationEntity);
+        vacationEntity.getEmployeeEntity().getVacationEntityList().add(vacationEntity);
 
         return service.save(vacationEntity);
     }
