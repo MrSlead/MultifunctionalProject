@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-error
+      author: Alexander
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            dataType: bigint
+            incrementBy: 1
+            maxValue: 9223372036854775807
+            minValue: 1
+            sequenceName: error_seq
+            startValue: 1
+        - createTable:
+            tableName: error
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: uuid
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_time
+                  type: timestamp(6)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: error_text
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: error_detail
+                  type: text
+                  constraints:
+                    nullable: true

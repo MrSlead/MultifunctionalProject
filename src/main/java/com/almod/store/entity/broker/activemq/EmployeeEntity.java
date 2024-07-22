@@ -22,7 +22,8 @@ import java.util.List;
 @Table(name = "employee")
 public class EmployeeEntity implements ActiveMQEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_seq")
+    @SequenceGenerator(name = "employee_seq", sequenceName = "employee_seq", allocationSize = 1)
     Long id;
 
     @Builder.Default

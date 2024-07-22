@@ -13,7 +13,7 @@ services:
       - ACTIVEMQ_WEB_ADMIN_PASSWORD=password
       - ACTIVEMQ_WEB_ADMIN_ROLES=admin
 
-  database:
+  mysql:
     container_name: db-mysql
     restart: always
     image: mysql:latest
@@ -22,6 +22,17 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: archive
+
+  postgresql:
+    container_name: db-postgresql
+    restart: always
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: "archive"
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root"
+    ports:
+      - "5432:5432"
 
   hazelcast:
     image: hazelcast/hazelcast
@@ -44,5 +55,6 @@ services:
       - "8080:8080"
     depends_on:
       - activemq
-      - database
+      - mysql
+      - postgresql
       - hazelcast

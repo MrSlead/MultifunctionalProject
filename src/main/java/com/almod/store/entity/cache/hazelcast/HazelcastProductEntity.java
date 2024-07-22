@@ -16,11 +16,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "products")
+@Table(name = "product")
 public class HazelcastProductEntity implements HazelcastEntity {
     @JsonIgnore
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq")
+    @SequenceGenerator(name = "product_seq", sequenceName = "product_seq", allocationSize = 1)
     Long id;
 
     @JsonIgnore
@@ -32,7 +33,6 @@ public class HazelcastProductEntity implements HazelcastEntity {
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     LocalDateTime dateTimePurchase;
 
-    @Lob
     @Column(length = 5000)
     String description;
 }
