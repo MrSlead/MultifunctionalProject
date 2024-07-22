@@ -20,7 +20,8 @@ import java.time.LocalDate;
 public class VacationEntity implements ActiveMQEntity {
     @JsonIgnore
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vacation_seq")
+    @SequenceGenerator(name = "vacation_seq", sequenceName = "vacation_seq", allocationSize = 1)
     Long id;
 
     @JsonIgnore

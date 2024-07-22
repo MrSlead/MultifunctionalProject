@@ -15,17 +15,17 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "error")
 public class ErrorDBEntity implements AbstractEntity {
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "error_seq")
+    @SequenceGenerator(name = "error_seq", sequenceName = "error_seq", allocationSize = 1)
     Long id;
-
-    LocalDateTime dateTime;
 
     String UUID;
 
+    LocalDateTime dateTime;
+
     String errorText;
 
-    @Lob
     @Column(length = 65535)
     String errorDetail;
 }

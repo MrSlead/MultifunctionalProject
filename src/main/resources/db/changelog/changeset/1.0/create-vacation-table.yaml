@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-vacation
+      author: Alexander
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            dataType: bigint
+            incrementBy: 1
+            maxValue: 9223372036854775807
+            minValue: 1
+            sequenceName: vacation_seq
+            startValue: 1
+        - createTable:
+            tableName: vacation
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: uuid
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_vacation
+                  type: date
+                  constraints:
+                    nullable: true
+              - column:
+                  name: end_vacation
+                  type: date
+                  constraints:
+                    nullable: true
+              - column:
+                  name: employee_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_vacation_employee
+                    references: employee(id)

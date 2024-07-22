@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-product
+      author: Alexander
+      changes:
+        - createSequence:
+              cacheSize: 1
+              cycle: false
+              dataType: bigint
+              incrementBy: 1
+              maxValue: 9223372036854775807
+              minValue: 1
+              sequenceName: product_seq
+              startValue: 1
+        - createTable:
+            tableName: product
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: uuid
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: date_time_purchase
+                  type: datetime(6)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: description
+                  type: text
+                  constraints:
+                    nullable: true
