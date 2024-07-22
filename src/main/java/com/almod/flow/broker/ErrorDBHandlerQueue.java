@@ -23,11 +23,11 @@ public class ErrorDBHandlerQueue {
         ErrorDBEntity errorDBEntity = new ErrorDBEntity();
         Date date = new Date((Long) exchange.getIn().getHeader("JMSTimestamp"));
 
-        errorDBEntity.builder()
+        errorDBEntity = errorDBEntity.builder()
                 .dateTime(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime())
                 .errorText(exchange.getIn().getBody().toString().substring(0, 255))
                 .errorDetail(exchange.getIn().getBody().toString())
-                .UUID(exchange.getIn().getHeader("UUID").toString());
+                .UUID(exchange.getIn().getHeader("UUID").toString()).build();
 
         return errorDBService.save(errorDBEntity);
     }

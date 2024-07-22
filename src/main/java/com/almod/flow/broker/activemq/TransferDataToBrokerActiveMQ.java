@@ -1,7 +1,7 @@
 package com.almod.flow.broker.activemq;
 
-import com.almod.flow.broker.TransferDataToBroker;
 import com.almod.flow.broker.ConstantsFlowBroker;
+import com.almod.flow.broker.TransferDataToBroker;
 import com.almod.store.entity.broker.BrokerEntity;
 import com.almod.util.ObjectMapperSingleton;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -34,6 +34,7 @@ public class TransferDataToBrokerActiveMQ extends TransferDataToBroker {
                 TextMessage textMessage = session.createTextMessage();
                 textMessage.setText(clientRequestString);
                 textMessage.setStringProperty("UUID", activemqEntity.getUUID());
+                textMessage.setStringProperty("BROKER_ENTITY_TYPE", activemqEntity.getClass().getSimpleName());
 
                 return textMessage;
             });

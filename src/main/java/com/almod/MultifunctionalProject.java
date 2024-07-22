@@ -6,10 +6,10 @@ import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
 @PropertySource(value={"classpath:resources.properties"})
-public class TestTechnologiesApplication {
+public class MultifunctionalProject {
 
     public static void main(String[] args) {
-        SpringApplication.run(TestTechnologiesApplication.class, args);
+        SpringApplication.run(MultifunctionalProject.class, args);
     }
 
 }

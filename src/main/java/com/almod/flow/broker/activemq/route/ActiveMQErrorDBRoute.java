@@ -10,6 +10,7 @@ public class ActiveMQErrorDBRoute extends RouteBuilder {
     public void configure() throws Exception {
         from("activemq:error")
                 .routeId("activemq-error-to-mysql")
+                .log("${body}")
                 .bean(ErrorDBHandlerQueue.class, "save");
     }
 }
