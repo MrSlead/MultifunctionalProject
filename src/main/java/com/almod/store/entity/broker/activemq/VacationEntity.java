@@ -36,5 +36,5 @@ public class VacationEntity implements ActiveMQEntity {
     @JsonSetter("employee_id")
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    ActiveMQEmployeeEntity activeMQEmployeeEntity;
+    EmployeeEntity employeeEntity;
 }

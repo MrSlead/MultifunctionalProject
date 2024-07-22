@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ActiveMQEmployeeDto implements BrokerDto {
+public class EmployeeDto implements BrokerDto {
     @NotBlank(message = "The firstname cannot be null or empty")
     String firstName;
 

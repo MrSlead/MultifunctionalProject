@@ -20,7 +20,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "employee")
-public class ActiveMQEmployeeEntity implements ActiveMQEntity {
+public class EmployeeEntity implements ActiveMQEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long id;
@@ -41,10 +41,9 @@ public class ActiveMQEmployeeEntity implements ActiveMQEntity {
 
     String placeOfResidence;
 
-    // fix EAGER initialize
     @Builder.Default
     @JsonIgnore
     @ToString.Exclude
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "activeMQEmployeeEntity")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employeeEntity")
     List<VacationEntity> vacationEntityList = new ArrayList<>();
 }

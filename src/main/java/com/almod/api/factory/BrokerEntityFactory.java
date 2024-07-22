@@ -1,12 +1,12 @@
 package com.almod.api.factory;
 
 import com.almod.api.dto.broker.BrokerDto;
-import com.almod.api.dto.broker.activemq.ActiveMQEmployeeDto;
+import com.almod.api.dto.broker.activemq.EmployeeDto;
 import com.almod.api.dto.broker.activemq.VacationDto;
-import com.almod.api.mapper.ActiveMQEmployeeMapper;
+import com.almod.api.mapper.EmployeeMapper;
 import com.almod.api.mapper.VacationMapper;
 import com.almod.store.entity.broker.BrokerEntity;
-import com.almod.store.entity.broker.activemq.ActiveMQEmployeeEntity;
+import com.almod.store.entity.broker.activemq.EmployeeEntity;
 import com.almod.store.entity.broker.activemq.VacationEntity;
 import com.almod.util.SpringApplicationContext;
 import org.springframework.stereotype.Component;
@@ -24,12 +24,12 @@ public class BrokerEntityFactory implements EntityFactory<BrokerDto, BrokerEntit
                 Optional<VacationEntity> vacation = instance.toEntity((VacationDto) dto);
 
                 return Optional.of(vacation.get());
-            } else if(dto instanceof ActiveMQEmployeeDto) {
-                var instance = (ActiveMQEmployeeMapper) SpringApplicationContext.getContext().getBean("activeMQEmployeeMapperImpl");
+            } else if(dto instanceof EmployeeDto) {
+                var instance = (EmployeeMapper) SpringApplicationContext.getContext().getBean("employeeMapperImpl");
 
-                ActiveMQEmployeeEntity activeMQEmployeeEntity = instance.toEntity((ActiveMQEmployeeDto) dto);
+                EmployeeEntity employeeEntity = instance.toEntity((EmployeeDto) dto);
 
-                return Optional.of(activeMQEmployeeEntity);
+                return Optional.of(employeeEntity);
             }
             else
                 throw new Exception("Unknown dto type: " + dto.getClass().getName());
