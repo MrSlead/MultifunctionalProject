@@ -47,7 +47,7 @@ public class CacheController {
         try {
             Optional<CacheEntity> entity = cacheEntityFactory.getEntity(clientRequest);
 
-            if(!entity.isPresent()) {
+            if(entity.isEmpty()) {
                 throw new Exception("CacheEntity not found");
             }
 
