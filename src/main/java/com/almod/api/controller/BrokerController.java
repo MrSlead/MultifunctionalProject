@@ -47,7 +47,7 @@ public class BrokerController {
         try {
             Optional<BrokerEntity> entity = brokerEntityFactory.getEntity(clientRequest);
 
-            if(!entity.isPresent()) {
+            if(entity.isEmpty()) {
                 throw new Exception("BrokerEntity not found");
             }
 

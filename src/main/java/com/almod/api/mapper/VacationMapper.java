@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Optional;
 
 @Mapper(componentModel = "spring")
-public abstract class VacationMapper {
+public abstract class VacationMapper implements com.almod.api.mapper.Mapper<VacationDto, VacationEntity> {
 
     protected EmployeeService employeeService;
 
@@ -29,17 +29,17 @@ public abstract class VacationMapper {
 
     }
 
-    public Optional<VacationEntity> toEntity(VacationDto vacationDto) {
+    public VacationEntity toEntity(VacationDto vacationDto) {
         Optional<EmployeeEntity> activeMQEmployeeEntity = employeeService.findById(vacationDto.getEmployeeId());
 
-        if(activeMQEmployeeEntity.isEmpty()) {
-            return Optional.empty();
-        }
+//        if(activeMQEmployeeEntity.isEmpty()) {
+//            return Optional.empty();
+//        }
 
-        Optional<VacationEntity> vacation = Optional.ofNullable(new VacationEntity().builder()
+        VacationEntity vacation = new VacationEntity().builder()
                 .startVacation(vacationDto.getStartVacation())
                 .endVacation(vacationDto.getEndVacation())
-                .employeeEntity(activeMQEmployeeEntity.get()).build());
+                .employeeEntity(activeMQEmployeeEntity.get()).build();
 
         return vacation;
     }
